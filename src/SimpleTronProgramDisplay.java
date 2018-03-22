@@ -15,6 +15,7 @@ public class SimpleTronProgramDisplay extends JPanel {
         programDisplay.setEditable(false);
         solidBorder = BorderFactory.createLineBorder(Color.BLACK, 2, true);
         programDisplay.setBorder(solidBorder);
+        programDisplay.setText("Program Operations Will Be " + '\n' + "Displayed Here When Input");
         addObj();
     }
 

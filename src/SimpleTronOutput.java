@@ -15,6 +15,14 @@ public class SimpleTronOutput extends JPanel {
             mainOutputPanel.setEditable(false);
             solidBorder = BorderFactory.createLineBorder(Color.BLACK, 2, true);
             mainOutputPanel.setBorder(solidBorder);
+            mainOutputPanel.setText("*** Welcome to SimpleTron! ***"+ '\n' +
+                    "*** Please enter your program one instruction ***"+ '\n' +
+                    "*** (or data word) at a time when prompted ***" + '\n' +
+                    "*** I will display the location ***" + '\n' +
+                    "*** number and a question mark (?).  You then ***" + '\n' +
+                    "*** type the word for that location.  Enter ***" + '\n' +
+                    "*** -99999 to stop entering your program. **");
+
             addObj();
         }
 
