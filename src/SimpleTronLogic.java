@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class SimpleTronLogic {
 
     private ArrayList<String> command;
+    private int accumulator;
     private int[] memory;
     private JTextArea jOut;
 
@@ -23,7 +24,7 @@ public class SimpleTronLogic {
         this.memory = memory;
     }
 
-    public SimpleTronLogic(JTextArea PrgDisplay) {
+    public SimpleTronLogic(JTextArea PrgDisplay, JTextArea MainDisplay) {
         memory = new int[100];
         command = new ArrayList<String>();
         jOut = PrgDisplay;
@@ -31,5 +32,17 @@ public class SimpleTronLogic {
 
     public void DisplayCommands(String commandTxt){
         jOut.append("\n" + commandTxt);
+        CheckIfEnd();
+    }
+
+    // checks if the programming has ended and it is time to execute
+    public void CheckIfEnd() {
+        if (command.contains("99999")){
+            ExecuteCommands();
+        }
+    }
+
+    public void ExecuteCommands() {
+        // while loop for execution
     }
 }

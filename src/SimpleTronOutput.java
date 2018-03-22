@@ -6,10 +6,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SimpleTronOutput extends JPanel {
-        private JTextArea mainOutputPanel;
+    private JTextArea mainOutputPanel;
     private Border solidBorder;
 
-        public SimpleTronOutput() {
+    public JTextArea getMainOutputPanel() {
+        return mainOutputPanel;
+    }
+
+    public void setMainOutputPanel(JTextArea mainOutputPanel) {
+        this.mainOutputPanel = mainOutputPanel;
+    }
+
+    public Border getSolidBorder() {
+        return solidBorder;
+    }
+
+    public void setSolidBorder(Border solidBorder) {
+        this.solidBorder = solidBorder;
+    }
+
+    public SimpleTronOutput() {
 
             mainOutputPanel = new JTextArea(30, 80);
             mainOutputPanel.setEditable(false);

@@ -19,9 +19,9 @@ public class SimpleTronMain extends JFrame{
 
 
         programDisplay = new SimpleTronProgramDisplay();
-        smplLogic = new SimpleTronLogic(programDisplay.getProgramDisplay());
-        operatorsPanel = new SimpleTronOperators(smplLogic);
         programOutput = new SimpleTronOutput();
+        smplLogic = new SimpleTronLogic(programDisplay.getProgramDisplay(), programOutput.getMainOutputPanel());
+        operatorsPanel = new SimpleTronOperators(smplLogic);
         jbtDisplayDump = new JButton("Display Memory Dump");
         addPanels();
         pack();
