@@ -26,7 +26,7 @@ public class SimpleTronOperators extends JPanel {
         jbtSubmitInput = new JButton("Submit Input");
         addActionListeners(); // adds action listeners to the buttons that have been created
 
-        // lables
+        // labels
         jlblUserInput = new JLabel("User Input: ");
         jlblEnterInstruction = new JLabel("Enter Instruction: ");
 
@@ -74,4 +74,6 @@ public class SimpleTronOperators extends JPanel {
 
         }
     }
+
+
 }

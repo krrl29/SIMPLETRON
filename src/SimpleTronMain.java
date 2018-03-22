@@ -49,7 +49,7 @@ public class SimpleTronMain extends JFrame{
         constr.ipady = 0;
         constr.ipadx = 0;
         constr.gridx = 1;
-        constr.gridwidth = 2;
+        constr.gridwidth = 1;
         constr.gridy = 0;
         constr.gridheight = 1;
         this.add(programOutput, constr);
@@ -70,7 +70,7 @@ public class SimpleTronMain extends JFrame{
         constr.insets = new Insets(5,300,10,10);
         constr.ipady = 5;
         constr.ipadx = 10;
-        constr.gridx = 2;
+        constr.gridx = 1;
         constr.gridwidth = 1;
         constr.gridy = 1;
         this.add(operatorsPanel, constr);
