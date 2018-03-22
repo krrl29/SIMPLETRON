@@ -11,14 +11,15 @@ public class SimpleTronOperators extends JPanel {
     private JLabel jlblUserInput;
     private JTextField jtxtInstructions;
     private JTextField jtxtUserInput;
+    private SimpleTronLogic smplLogic;
 
     private Border solidBorder;
 
     private final int NUM_ROWS = 2;
     private final int NUM_COLS = 3;
 
-    public SimpleTronOperators() {
-
+    public SimpleTronOperators(SimpleTronLogic smplLogic) {
+        this.smplLogic = smplLogic;
         solidBorder = BorderFactory.createLineBorder(Color.BLACK, 1, false);
         this.setLayout(new GridLayout(NUM_ROWS, NUM_COLS));
 
@@ -63,7 +64,9 @@ public class SimpleTronOperators extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-//test
+            String test = jtxtInstructions.getText();
+            smplLogic.getCommand().add(test);
+            smplLogic.DisplayCommands(test);
         }
     }
 

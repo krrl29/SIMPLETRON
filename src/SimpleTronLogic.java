@@ -1,24 +1,35 @@
+import javax.swing.*;
+import java.util.ArrayList;
+
 public class SimpleTronLogic {
 
-
-    private String[] command;
+    private ArrayList<String> command;
     private int[] memory;
+    private JTextArea jOut;
 
-    public SimpleTronLogic(){
-
-        command = new String[100];
-        memory = new int[100];
-
-        //when submit instruction button pressed
-        int increment = 0;
-        //accept commands till given -99999
-        while (jtxtSubmitInstruction.Text != "-99999"){
-            command[increment] = jtxtSubmitInstruction.Text;
-            increment++;
-        }
-
-
-
+    public ArrayList<String> getCommand() {
+        return command;
     }
 
+    public void setCommand(ArrayList<String> command) {
+        this.command = command;
+    }
+
+    public int[] getMemory() {
+        return memory;
+    }
+
+    public void setMemory(int[] memory) {
+        this.memory = memory;
+    }
+
+    public SimpleTronLogic(JTextArea PrgDisplay) {
+        memory = new int[100];
+        command = new ArrayList<String>();
+        jOut = PrgDisplay;
+    }
+
+    public void DisplayCommands(String commandTxt){
+        jOut.append("\n" + commandTxt);
+    }
 }

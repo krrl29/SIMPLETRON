@@ -8,6 +8,7 @@ public class SimpleTronMain extends JFrame{
     private SimpleTronOutput programOutput;
     private JButton jbtDisplayDump;
     private GridBagConstraints constr;
+    private SimpleTronLogic smplLogic;
 
     public SimpleTronMain(){
         this.setTitle("SIMPLETRON");
@@ -17,8 +18,9 @@ public class SimpleTronMain extends JFrame{
         constr = new GridBagConstraints();
 
 
-        operatorsPanel = new SimpleTronOperators();
         programDisplay = new SimpleTronProgramDisplay();
+        smplLogic = new SimpleTronLogic(programDisplay.getProgramDisplay());
+        operatorsPanel = new SimpleTronOperators(smplLogic);
         programOutput = new SimpleTronOutput();
         jbtDisplayDump = new JButton("Display Memory Dump");
         addPanels();

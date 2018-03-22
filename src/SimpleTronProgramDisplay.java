@@ -8,6 +8,21 @@ public class SimpleTronProgramDisplay extends JPanel {
     private JTextArea programDisplay;
     private Border solidBorder;
 
+    public JTextArea getProgramDisplay() {
+        return programDisplay;
+    }
+
+    public void setProgramDisplay(JTextArea programDisplay) {
+        this.programDisplay = programDisplay;
+    }
+
+    public Border getSolidBorder() {
+        return solidBorder;
+    }
+
+    public void setSolidBorder(Border solidBorder) {
+        this.solidBorder = solidBorder;
+    }
 
     public SimpleTronProgramDisplay() {
 
