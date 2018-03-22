@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SimpleTronOperators extends JPanel {
     private JButton jbtSubmitInstruction;
@@ -19,13 +21,20 @@ public class SimpleTronOperators extends JPanel {
 
         solidBorder = BorderFactory.createLineBorder(Color.BLACK, 1, false);
         this.setLayout(new GridLayout(NUM_ROWS, NUM_COLS));
+
         jbtSubmitInstruction = new JButton("Submit Instruction");
         jbtSubmitInput = new JButton("Submit Input");
+        addActionListeners(); // adds action listeners to the buttons that have been created
+
+        // lables
         jlblUserInput = new JLabel("User Input: ");
         jlblEnterInstruction = new JLabel("Enter Instruction: ");
+
+        // text fields
         jtxtInstructions = new JTextField();
         jtxtUserInput = new JTextField();
 
+        //adding borders
         jtxtInstructions.setBorder(solidBorder);
         jtxtUserInput.setBorder(solidBorder);
 
@@ -41,5 +50,28 @@ public class SimpleTronOperators extends JPanel {
         this.add(jlblUserInput);
         this.add(jtxtUserInput);
         this.add(jbtSubmitInput);
+    }
+
+    private void addActionListeners() {
+        SubmitInstructionActionListener SubInstAL = new SubmitInstructionActionListener();
+        SubmitInputActionListener SubInAL = new SubmitInputActionListener();
+        jbtSubmitInput.addActionListener(SubInAL);
+        jbtSubmitInstruction.addActionListener(SubInstAL);
+    }
+
+    public class SubmitInstructionActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+    public class SubmitInputActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
     }
 }
