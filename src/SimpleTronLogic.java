@@ -60,60 +60,13 @@ public class SimpleTronLogic {
                 noInstructions++;
             }
         }
-        ExecuteSML();
+        ExeSML();
     }
 
-    private void ExecuteSML() {
-        int instructionCounter = 0;
-        int instructionRegister;
-        while(instructionCounter < noInstructions){
-            instructionRegister = memory[instructionCounter];
-            int operationCode = instructionRegister /100;
-            int operand = instructionRegister % 100;
-            switch (operationCode){
-                case (10):
-                    jMain.append("\n\n" + instructionCounter + " ? " + instructionRegister);
-                    jMain.append("\nPlease enter an integer");
-                    // I cannot figure out how to get this
-                    // f**king thing to wait for user input -DSH
-                    StoreValue(operand);
-                    break;
-                case (11):
-
-                    break;
-                case (20):
-
-                    break;
-                case (21):
-
-                    break;
-                case (30):
-
-                    break;
-                case (31):
-
-                    break;
-                case (32):
-
-                    break;
-                case (33):
-
-                    break;
-                case (40):
-
-                    break;
-                case (41):
-
-                    break;
-                case (42):
-
-                    break;
-                case (43):
-
-                    break;
-            }
-            instructionCounter++;
-        }
+    private void ExeSML() {
+        ExecuteSML exe = new ExecuteSML(noInstructions,memory,jMain);
+        Thread t = new Thread(exe);
+        t.start();
     }
 
     private void StoreValue(int operand) {
