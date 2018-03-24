@@ -3,6 +3,7 @@ import javax.swing.*;
 public class ExecuteSML implements Runnable {
 
     private int noInstructions;
+    private int accumulator;
     private Object lock;
     private int usrValue;
     private int[] memory;
@@ -94,21 +95,27 @@ public class ExecuteSML implements Runnable {
                     break;
                 case (20):
                     DisplayCommand(instructionCounter, instructionRegister);
+                    LoadAccu(operand);
                     break;
                 case (21):
                     DisplayCommand(instructionCounter, instructionRegister);
+                    PullAccu(operand);
                     break;
                 case (30):
                     DisplayCommand(instructionCounter, instructionRegister);
+                    Add(operand);
                     break;
                 case (31):
                     DisplayCommand(instructionCounter, instructionRegister);
+                    Subtract(operand);
                     break;
                 case (32):
                     DisplayCommand(instructionCounter, instructionRegister);
+                    Divide(operand);
                     break;
                 case (33):
                     DisplayCommand(instructionCounter, instructionRegister);
+                    Multiply(operand);
                     break;
                 case (40):
                     DisplayCommand(instructionCounter, instructionRegister);
@@ -137,5 +144,29 @@ public class ExecuteSML implements Runnable {
 
     private void DisplayLocation(int operand) {
         jMain.append("\n" + memory[operand]);
+    }
+
+    private void LoadAccu(int operand) {
+        accumulator = memory[operand];
+    }
+
+    private void PullAccu(int operand){
+        memory[operand] = accumulator;
+    }
+
+    private void Add(int operand) {
+        accumulator += memory[operand];
+    }
+
+    private void Subtract(int operand) {
+        accumulator -= memory[operand];
+    }
+
+    private void Divide(int operand) {
+        accumulator /= memory[operand];
+    }
+
+    private void Multiply(int operand) {
+        accumulator *= memory[operand];
     }
 }
