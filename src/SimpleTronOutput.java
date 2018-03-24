@@ -37,7 +37,7 @@ public class SimpleTronOutput extends JPanel {
                     "*** I will display the location ***" + '\n' +
                     "*** number and a question mark (?).  You then ***" + '\n' +
                     "*** type the word for that location.  Enter ***" + '\n' +
-                    "*** -99999 to stop entering your program. **");
+                    "*** -99990 to stop entering your program. **");
 
             addObj();
         }

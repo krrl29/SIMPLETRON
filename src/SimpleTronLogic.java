@@ -60,7 +60,7 @@ public class SimpleTronLogic {
     private void LoadMemory(){
         noInstructions =0;
         for(int i = 0; i < command.size(); i++){
-            if(!command.get(i).equals("99999")){
+            if(!command.get(i).equals("-99990")){
                 String op = command.get(i).substring(1,5);
                 memory[i] = Integer.parseInt(op);
                 noInstructions++;
