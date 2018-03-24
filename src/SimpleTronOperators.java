@@ -75,7 +75,9 @@ public class SimpleTronOperators extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             smplLogic.setUsrValue(Integer.parseInt(jtxtUserInput.getText()));
-            smplLogic.getLock().notify();
+            synchronized (smplLogic.getLock()){
+                smplLogic.getLock().notify();
+            }
         }
     }
 
