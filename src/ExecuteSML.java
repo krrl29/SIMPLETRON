@@ -3,10 +3,19 @@ import javax.swing.*;
 public class ExecuteSML implements Runnable {
 
     private int noInstructions;
+    private Object lock;
     private int usrValue;
     private int[] memory;
     private JTextArea jMain;
     private boolean test = false;
+
+    public Object getLock() {
+        return lock;
+    }
+
+    public void setLock(Object lock) {
+        this.lock = lock;
+    }
 
     public int getUsrValue() {
         return usrValue;
@@ -48,10 +57,11 @@ public class ExecuteSML implements Runnable {
         this.test = test;
     }
 
-    public ExecuteSML(int noInstructions, int[] memory, JTextArea jMain ) {
+    public ExecuteSML(int noInstructions, int[] memory, JTextArea jMain, Object lock) {
         this.noInstructions = noInstructions;
         this.memory = memory;
         this.jMain = jMain;
+        this.lock = lock;
     }
 
     @Override
@@ -66,10 +76,12 @@ public class ExecuteSML implements Runnable {
                 case (10):
                     DisplayCommand(instructionCounter, instructionRegister);
                     jMain.append("\nPlease enter an integer"); // this tech. works, not the safest, but works
-                    try {
-                        Thread.sleep(10000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    synchronized (lock) {
+                        try {
+                            lock.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                     StoreValue(operand);
                     break;

@@ -6,6 +6,7 @@ import java.util.List;
 public class SimpleTronLogic {
 
     private ArrayList<String> command;
+    private Object lock = new Object();
     private int accumulator;
     private ExecuteSML exe;
     private int usrValue;
@@ -13,6 +14,14 @@ public class SimpleTronLogic {
     private int[] memory;
     private JTextArea jOut;
     private JTextArea jMain;
+
+    public Object getLock() {
+        return lock;
+    }
+
+    public void setLock(Object lock) {
+        this.lock = lock;
+    }
 
     public void setUsrValue(int usrValue) {
         this.usrValue = usrValue;
@@ -61,7 +70,7 @@ public class SimpleTronLogic {
     }
 
     private void ExeSML() {
-        exe = new ExecuteSML(noInstructions,memory,jMain);
+        exe = new ExecuteSML(noInstructions,memory,jMain, this.lock);
         Thread t = new Thread(exe);
         t.start();
     }
