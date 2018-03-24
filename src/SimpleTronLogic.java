@@ -51,7 +51,8 @@ public class SimpleTronLogic {
 
     // checks if the programming has ended and it is time to execute
     private void CheckIfEnd() {
-        if (command.contains("99999")){
+        if (command.contains("-99990")){
+            jMain.append("\n\n*** Code Entry Completed ***\n*** Execution Will Begin ***\n");
             command.remove(command.get(command.size() -1));
             LoadMemory();
         }

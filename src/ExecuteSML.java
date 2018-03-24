@@ -68,10 +68,13 @@ public class ExecuteSML implements Runnable {
     public void run() {
         int instructionCounter = 0;
         int instructionRegister;
-        while(instructionCounter < noInstructions){
+        int operand;
+        int operationCode=0;
+
+        while(operationCode != 43){
             instructionRegister = memory[instructionCounter];
-            int operationCode = instructionRegister /100;
-            int operand = instructionRegister % 100;
+            operationCode = instructionRegister /100;
+            operand = instructionRegister % 100;
             switch (operationCode){
                 case (10):
                     DisplayCommand(instructionCounter, instructionRegister);
@@ -125,7 +128,7 @@ public class ExecuteSML implements Runnable {
     }
 
     private void DisplayCommand(int instructionCounter, int instructionRegister) {
-        jMain.append("\n\n" + String.format("%02d", instructionCounter) + " ? " + instructionRegister);
+        jMain.append("\n" + String.format("%02d", instructionCounter) + " ? " + instructionRegister);
     }
 
     private void StoreValue(int operand) {
