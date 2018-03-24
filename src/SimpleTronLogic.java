@@ -7,19 +7,16 @@ public class SimpleTronLogic {
 
     private ArrayList<String> command;
     private int accumulator;
-    public boolean test=false;
+    private ExecuteSML exe;
     private int usrValue;
     private int noInstructions;
     private int[] memory;
     private JTextArea jOut;
     private JTextArea jMain;
 
-    public int getUsrValue() {
-        return usrValue;
-    }
-
     public void setUsrValue(int usrValue) {
         this.usrValue = usrValue;
+        exe.setUsrValue(usrValue);
     }
 
     public ArrayList<String> getCommand() {
@@ -64,7 +61,7 @@ public class SimpleTronLogic {
     }
 
     private void ExeSML() {
-        ExecuteSML exe = new ExecuteSML(noInstructions,memory,jMain);
+        exe = new ExecuteSML(noInstructions,memory,jMain);
         Thread t = new Thread(exe);
         t.start();
     }

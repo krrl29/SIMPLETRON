@@ -3,9 +3,18 @@ import javax.swing.*;
 public class ExecuteSML implements Runnable {
 
     private int noInstructions;
+    private int usrValue;
     private int[] memory;
     private JTextArea jMain;
     private boolean test = false;
+
+    public int getUsrValue() {
+        return usrValue;
+    }
+
+    public void setUsrValue(int usrValue) {
+        this.usrValue = usrValue;
+    }
 
     public int getNoInstructions() {
         return noInstructions;
@@ -55,52 +64,63 @@ public class ExecuteSML implements Runnable {
             int operand = instructionRegister % 100;
             switch (operationCode){
                 case (10):
-                    jMain.append("\n\n" + instructionCounter + " ? " + instructionRegister);
+                    DisplayCommand(instructionCounter, instructionRegister);
                     jMain.append("\nPlease enter an integer"); // this tech. works, not the safest, but works
-                    while (!test){
-
+                    try {
+                        Thread.sleep(10000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                     StoreValue(operand);
                     break;
                 case (11):
-
+                    DisplayCommand(instructionCounter, instructionRegister);
+                    DisplayLocation(operand);
                     break;
                 case (20):
-
+                    DisplayCommand(instructionCounter, instructionRegister);
                     break;
                 case (21):
-
+                    DisplayCommand(instructionCounter, instructionRegister);
                     break;
                 case (30):
-
+                    DisplayCommand(instructionCounter, instructionRegister);
                     break;
                 case (31):
-
+                    DisplayCommand(instructionCounter, instructionRegister);
                     break;
                 case (32):
-
+                    DisplayCommand(instructionCounter, instructionRegister);
                     break;
                 case (33):
-
+                    DisplayCommand(instructionCounter, instructionRegister);
                     break;
                 case (40):
-
+                    DisplayCommand(instructionCounter, instructionRegister);
                     break;
                 case (41):
-
+                    DisplayCommand(instructionCounter, instructionRegister);
                     break;
                 case (42):
-
+                    DisplayCommand(instructionCounter, instructionRegister);
                     break;
                 case (43):
-
+                    DisplayCommand(instructionCounter, instructionRegister);
                     break;
             }
             instructionCounter++;
         }
     }
 
-    private void StoreValue(int operand) {
+    private void DisplayCommand(int instructionCounter, int instructionRegister) {
+        jMain.append("\n\n" + String.format("%02d", instructionCounter) + " ? " + instructionRegister);
+    }
 
+    private void StoreValue(int operand) {
+        memory[operand] = usrValue;
+    }
+
+    private void DisplayLocation(int operand) {
+        jMain.append("\n" + memory[operand]);
     }
 }
