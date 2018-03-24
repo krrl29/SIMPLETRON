@@ -3,6 +3,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class SimpleTronOperators extends JPanel {
     private JButton jbtSubmitInstruction;
@@ -65,8 +66,12 @@ public class SimpleTronOperators extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             String test = jtxtInstructions.getText();
-            smplLogic.getCommand().add(test);
-            smplLogic.DisplayCommands(test);
+            if(Arrays.asList(smplLogic.getCOMMANDS_DEF()).contains(test.substring(0,3))){
+                smplLogic.getCommand().add(test);
+                smplLogic.DisplayCommands(test);
+            } else {
+                // dialog/messageBox that asks to enter valid input maybe?
+            }
         }
     }
 

@@ -126,9 +126,6 @@ public class ExecuteSML implements Runnable {
                 case (42):
                     DisplayCommand(instructionCounter, instructionRegister);
                     break;
-                case (43):
-                    DisplayCommand(instructionCounter, instructionRegister);
-                    break;
             }
             instructionCounter++;
         }

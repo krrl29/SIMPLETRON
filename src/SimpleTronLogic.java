@@ -5,6 +5,21 @@ import java.util.List;
 
 public class SimpleTronLogic {
 
+    private final String[] COMMANDS_DEF = {
+            "+10",
+            "+11",
+            "+20",
+            "+21",
+            "+30",
+            "+31",
+            "+32",
+            "+33",
+            "+40",
+            "+41",
+            "+42",
+            "+43",
+            "-99"
+    };
     private ArrayList<String> command;
     private Object lock = new Object();
     private int accumulator;
@@ -14,6 +29,10 @@ public class SimpleTronLogic {
     private int[] memory;
     private JTextArea jOut;
     private JTextArea jMain;
+
+    public String[] getCOMMANDS_DEF() {
+        return COMMANDS_DEF;
+    }
 
     public Object getLock() {
         return lock;
