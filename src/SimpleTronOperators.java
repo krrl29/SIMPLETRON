@@ -3,6 +3,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Arrays;
 
 public class SimpleTronOperators extends JPanel {
@@ -26,7 +28,6 @@ public class SimpleTronOperators extends JPanel {
 
         jbtSubmitInstruction = new JButton("Submit Instruction");
         jbtSubmitInput = new JButton("Submit Input");
-        addActionListeners(); // adds action listeners to the buttons that have been created
 
         // labels
         jlblUserInput = new JLabel("User Input:");
@@ -43,6 +44,7 @@ public class SimpleTronOperators extends JPanel {
         jlblEnterInstruction.setHorizontalAlignment(SwingConstants.RIGHT);
         jlblUserInput.setHorizontalAlignment(SwingConstants.RIGHT);
 
+        addActionListeners(); // adds action listeners to the buttons that have been created
         addObj();
     }
     public void addObj() {
@@ -60,6 +62,13 @@ public class SimpleTronOperators extends JPanel {
         SubmitInputActionListener SubInAL = new SubmitInputActionListener();
         jbtSubmitInput.addActionListener(SubInAL);
         jbtSubmitInstruction.addActionListener(SubInstAL);
+
+        InputKeyEvent inputKeyEvent = new InputKeyEvent();
+        InstructionKeyEvent instructionKeyEvent = new InstructionKeyEvent();
+        jtxtInstructions.addKeyListener(instructionKeyEvent);
+        jtxtUserInput.addKeyListener(inputKeyEvent);
+
+
     }
 
     public class SubmitInstructionActionListener implements ActionListener {
@@ -91,5 +100,59 @@ public class SimpleTronOperators extends JPanel {
         }
     }
 
+    public class InstructionKeyEvent implements KeyListener {
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+                jtxtInstructions.selectAll();
+                String test = jtxtInstructions.getText();
+                if (Arrays.asList(smplLogic.getCOMMANDS_DEF()).contains(test.substring(0, 3))) {
+                    smplLogic.getCommand().add(test);
+                    smplLogic.DisplayCommands(test);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please Enter a Valid Command!");
+                }
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
+    }
+
+    public class InputKeyEvent implements KeyListener {
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode()==KeyEvent.VK_ENTER){
+                jtxtUserInput.selectAll();
+                try {
+                    smplLogic.setUsrValue(Integer.parseInt(jtxtUserInput.getText()));
+                    synchronized (smplLogic.getLock()){
+                        smplLogic.getLock().notify();
+                    }
+                } catch (NumberFormatException nfx) {
+                    JOptionPane.showMessageDialog(null,"Please Enter a Valid Number!");
+                }
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
+    }
 
 }
