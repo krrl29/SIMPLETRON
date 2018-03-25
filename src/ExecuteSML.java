@@ -13,6 +13,8 @@ public class ExecuteSML implements Runnable {
     private JTextArea jMain;
     private boolean test = false;
 
+    private SimpleTronMemoryDump memoryDump;
+
     public Object getLock() {
         return lock;
     }
@@ -137,7 +139,9 @@ public class ExecuteSML implements Runnable {
         }
         if(operationCode == -1) {
             DisplayError();
+            DisplayDump(accumulator, instructionCounter, memory);
         }
+        DisplayDump(accumulator, instructionCounter, memory);
     }
 
     private void DisplayCommand(int instructionCounter, int instructionRegister) {
@@ -234,4 +238,19 @@ public class ExecuteSML implements Runnable {
         }
     }
 
+    private void DisplayDump(int accumulator, int instructionCounter, int[] memory) {
+        int instructionRegister = memory[instructionCounter];
+        operationCode = instructionRegister /100;
+        int operand = instructionRegister % 100;
+        String out = "REGISTERS:\n";
+        out += "accumulator            " + accumulator + '\n';
+        out += "instructionCounter       " + instructionCounter + '\n';
+        out += "instructionRegister    +" + memory[instructionCounter] + '\n';
+        out += "operationCode             " + operationCode + '\n';
+        out += "operand                   " + operand + '\n';
+
+        memoryDump = new SimpleTronMemoryDump(out);
+
+
+    }
 }

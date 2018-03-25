@@ -57,17 +57,6 @@ public class SimpleTronMain extends JFrame{
         constr.weightx = 1;
         this.add(programOutput, constr);
 
-        /*//constraints for Memory dump button
-        constr.fill = GridBagConstraints.HORIZONTAL;
-        constr.insets = new Insets(0,20,0,30);
-        constr.ipady = 5;
-        constr.ipadx = 10;
-        constr.gridx = 0;
-        constr.gridwidth = 1;
-        constr.gridy = 1;
-        constr.gridheight = 1;
-        constr.weightx = 0;
-        this.add(jbtDisplayDump, constr);*/
 
         //constraints for operatorsPanel
         constr.fill = GridBagConstraints.HORIZONTAL;
