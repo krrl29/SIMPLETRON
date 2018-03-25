@@ -5,6 +5,10 @@ import java.util.List;
 
 public class SimpleTronLogic {
 
+    /************************************
+     * Author: Doug Heasley
+     * Purpose: This is a list of commands that are valid for input into the SimpTron
+     ************************************/
     private final String[] COMMANDS_DEF = {
             "+10",
             "+11",
@@ -57,7 +61,11 @@ public class SimpleTronLogic {
         this.command = command;
     }
 
-
+    /**************************************
+     * Author: Doug Heasley
+     * Purpose: Constructor, gets a ref. to the main, output, and memory dump textareas,
+     * as well as creates the ArrayList that stores the input commands, and the memory array
+    * */
     public SimpleTronLogic(JTextArea PrgDisplay, JTextArea MainDisplay, JTextArea MemoryDumpDisplay) {
         memory = new int[100];
         command = new ArrayList<>();
@@ -66,6 +74,12 @@ public class SimpleTronLogic {
         jDump = MemoryDumpDisplay;
     }
 
+    /************************************************
+     * Author: Doug Heasley
+     * Purpose: Displays the commands as the user types them in
+     * in the output window, also checks to see if the user has
+     * ended input
+     * **********************************************/
     public void DisplayCommands(String commandTxt){
         jOut.append("\n" + commandTxt);
         CheckIfEnd();
@@ -80,6 +94,11 @@ public class SimpleTronLogic {
         }
     }
 
+    /***********************************************************************
+     * Author: Doug Heasley
+     * Purpose: Loads the commands into memory by dropping the first char, and
+     * converting to an integer
+     * *********************************************************************/
     private void LoadMemory(){
         noInstructions =0;
         for(int i = 0; i < command.size(); i++){
@@ -92,14 +111,15 @@ public class SimpleTronLogic {
         ExeSML();
     }
 
+    /************************************************************************
+     * Author: Doug Heasley
+     * Purpose: Creates a new thread where the SML will be executed, takes the memory,
+     * and relevent JTextAreas as params, as well as a "lock" object for implementing
+     * wait() and notify()
+     * ***********************************************************************/
     private void ExeSML() {
         exe = new ExecuteSML(noInstructions,memory,jMain, jDump, this.lock);
         Thread t = new Thread(exe);
         t.start();
-    }
-
-    private void StoreValue(int operand) {
-        memory[operand] = usrValue;
-        usrValue = 0;
     }
 }

@@ -1,8 +1,9 @@
 import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 
 public class SimpleTronMemoryDump extends JFrame {
     private JTextArea memOut;
-
 
     public JTextArea getMemOut() {
         return memOut;
@@ -14,12 +15,13 @@ public class SimpleTronMemoryDump extends JFrame {
     public SimpleTronMemoryDump() {
         this.setTitle("MEMORY_DUMP");
         this.setSize(300, 300);
-//        this.setDefaultCloseOperation((JFrame.EXIT_ON_CLOSE));
 
         memOut = new JTextArea();
-//        memOut.setText(out);
+        memOut.setEditable(false);
+        memOut.setText("*** Memory Dump: ***");
+
         this.add(memOut);
         pack();
-        //this.setVisible(true);
     }
 }
+

@@ -72,6 +72,11 @@ public class ExecuteSML implements Runnable {
         this.jDump = jDump;
     }
 
+    /*************************************************************
+     * Author: Doug Heasley
+     * Purpose: Runs the simulation while the halt command is not reached,
+     * as well as when there is no error code returned by an operation
+     ************************************************************/
     @Override
     public void run() {
         instructionCounter = 0;
@@ -84,9 +89,13 @@ public class ExecuteSML implements Runnable {
             operationCode = instructionRegister /100;
             operand = instructionRegister % 100;
             switch (operationCode){
-                case (10):
+                case (10): // read user value
+                    DisplayDump(accumulator, instructionCounter, memory);
                     DisplayCommand(instructionCounter, instructionRegister);
-                    jMain.append("\nPlease enter an integer"); // this tech. works, not the safest, but works
+                    jMain.append("\nPlease enter an integer");
+
+                    /* Logic for being able to accept user input from the GUI and pausing operations in this
+                    * class while that is happening -DSH */
                     synchronized (lock) {
                         try {
                             lock.wait();
@@ -96,48 +105,57 @@ public class ExecuteSML implements Runnable {
                     }
                     StoreValue(operand);
                     break;
-                case (11):
+                case (11): // write to main output -DSH
+                    DisplayDump(accumulator, instructionCounter, memory);
                     DisplayCommand(instructionCounter, instructionRegister);
                     DisplayLocation(operand);
                     break;
-                case (20):
+                case (20): // load from memory into accum. -DSH
+                    DisplayDump(accumulator, instructionCounter, memory);
                     DisplayCommand(instructionCounter, instructionRegister);
                     LoadAccu(operand);
                     break;
-                case (21):
+                case (21): // store from accum. into memory -DSH
+                    DisplayDump(accumulator, instructionCounter, memory);
                     DisplayCommand(instructionCounter, instructionRegister);
                     PullAccu(operand);
                     break;
-                case (30):
+                case (30): // add -DSH
+                    DisplayDump(accumulator, instructionCounter, memory);
                     DisplayCommand(instructionCounter, instructionRegister);
                     Add(operand);
                     break;
-                case (31):
+                case (31): // subtract -DSH
+                    DisplayDump(accumulator, instructionCounter, memory);
                     DisplayCommand(instructionCounter, instructionRegister);
                     Subtract(operand);
                     break;
-                case (32):
+                case (32): // divide -DSH
+                    DisplayDump(accumulator, instructionCounter, memory);
                     DisplayCommand(instructionCounter, instructionRegister);
                     Divide(operand);
                     break;
-                case (33):
+                case (33): // multiply  -DSH
+                    DisplayDump(accumulator, instructionCounter, memory);
                     DisplayCommand(instructionCounter, instructionRegister);
                     Multiply(operand);
                     break;
-                case (40):
+                case (40): // branch to a location in memory -DSH
+                    DisplayDump(accumulator, instructionCounter, memory);
                     DisplayCommand(instructionCounter, instructionRegister);
                     Branch(operand);
                     break;
-                case (41):
+                case (41): // branch to a location in memory when accum. is neg. -DSH
+                    DisplayDump(accumulator, instructionCounter, memory);
                     DisplayCommand(instructionCounter, instructionRegister);
                     NegativeConditionalBranch(operand);
                     break;
-                case (42):
+                case (42): // branch to a location in memory when accum. is zero -DSH
+                    DisplayDump(accumulator, instructionCounter, memory);
                     DisplayCommand(instructionCounter, instructionRegister);
                     ZeroConditionalBranch(operand);
                     break;
             }
-            DisplayDump(accumulator, instructionCounter, memory);
             instructionCounter++;
         }
         if(operationCode == -1) {
@@ -147,26 +165,32 @@ public class ExecuteSML implements Runnable {
         DisplayDump(accumulator, instructionCounter, memory);
     }
 
+    // displays the commands in main when they are being exe. -DSH
     private void DisplayCommand(int instructionCounter, int instructionRegister) {
         jMain.append("\n" + String.format("%02d", instructionCounter) + " ? " + instructionRegister);
     }
 
+    // stores user value in memory -DSH
     private void StoreValue(int operand) {
         memory[operand] = usrValue;
     }
 
+    // displays a location in mem. to the screen -DSH
     private void DisplayLocation(int operand) {
         jMain.append("\n" + memory[operand]);
     }
 
+    // loads a value in accum. from memory -DSH
     private void LoadAccu(int operand) {
         accumulator = memory[operand];
     }
 
+    // loads a location in mem from the accum -DSH
     private void PullAccu(int operand){
         memory[operand] = accumulator;
     }
 
+    // adds, leaves sum in accum. -DSH
     private void Add(int operand) {
         accumulator += memory[operand];
         if(accumulator < -9999 || accumulator > 9999){
@@ -176,6 +200,7 @@ public class ExecuteSML implements Runnable {
         }
     }
 
+    // subtracts, leaves difference in accum. -DSH
     private void Subtract(int operand) {
         accumulator -= memory[operand];
         if(accumulator < -9999 || accumulator > 9999){
@@ -185,6 +210,7 @@ public class ExecuteSML implements Runnable {
         }
     }
 
+    // divides, leaves result in accum. -DSH
     private void Divide(int operand) {
         if(operand == 0) {
             // break out of loop fatal division by zero error -DSH
@@ -194,6 +220,7 @@ public class ExecuteSML implements Runnable {
         accumulator /= memory[operand];
     }
 
+    // multiplies, leaves product in accum. -DSH
     private void Multiply(int operand) {
         accumulator *= memory[operand];
         if(accumulator < -9999 || accumulator > 9999){
@@ -203,22 +230,26 @@ public class ExecuteSML implements Runnable {
         }
     }
 
+    // branches to a location in mem. -DSH
     private void Branch(int operand) {
         instructionCounter = operand-1;
     }
 
+    // branches to a location in mem. when accum. is zero -DSH
     private void ZeroConditionalBranch(int operand) {
         if(accumulator == 0) {
             instructionCounter = operand-1;
         }
     }
 
+    // branches to a location in mem. when accum. is negative -DSH
     private void NegativeConditionalBranch(int operand) {
         if(accumulator < 0){
             instructionCounter = operand-1;
         }
     }
 
+    // displays any errors that may have occurred -DSH
     private void DisplayError() {
         switch(errorCode){
             case(30):
@@ -241,6 +272,7 @@ public class ExecuteSML implements Runnable {
         }
     }
 
+    // adds the pertinent information to the memory dump window
     private void DisplayDump(int accumulator, int instructionCounter, int[] memory) {
         int instructionRegister = memory[instructionCounter];
         operationCode = instructionRegister /100;
@@ -252,7 +284,7 @@ public class ExecuteSML implements Runnable {
 //        out += "operationCode             " + operationCode + '\n';
 //        out += "operand                   " + operand + '\n';
 
-        jDump.append("REGISTERS:\n");
+        jDump.append("\nREGISTERS:\n");
         jDump.append("accumulator            " + accumulator + '\n');
         jDump.append("instructionCounter       " + instructionCounter + '\n');
         jDump.append("instructionRegister    +" + memory[instructionCounter] + '\n');
