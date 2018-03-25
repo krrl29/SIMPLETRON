@@ -44,7 +44,8 @@ public class SimpleTronOperators extends JPanel {
         jlblEnterInstruction.setHorizontalAlignment(SwingConstants.RIGHT);
         jlblUserInput.setHorizontalAlignment(SwingConstants.RIGHT);
 
-        addActionListeners(); // adds action listeners to the buttons that have been created
+        addActionListeners(); // adds action listeners to the buttons and text
+
         addObj();
     }
     public void addObj() {
@@ -54,7 +55,6 @@ public class SimpleTronOperators extends JPanel {
         this.add(jlblUserInput);
         this.add(jtxtUserInput);
         this.add(jbtSubmitInput);
-        //this.getRootPane().setDefaultButton(jbtSubmitInstruction);
     }
 
     private void addActionListeners() {
@@ -67,8 +67,6 @@ public class SimpleTronOperators extends JPanel {
         InstructionKeyEvent instructionKeyEvent = new InstructionKeyEvent();
         jtxtInstructions.addKeyListener(instructionKeyEvent);
         jtxtUserInput.addKeyListener(inputKeyEvent);
-
-
     }
 
     public class SubmitInstructionActionListener implements ActionListener {
@@ -110,8 +108,8 @@ public class SimpleTronOperators extends JPanel {
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getKeyCode()==KeyEvent.VK_ENTER) {
-                jtxtInstructions.selectAll();
                 String test = jtxtInstructions.getText();
+                jtxtInstructions.selectAll();
                 if (Arrays.asList(smplLogic.getCOMMANDS_DEF()).contains(test.substring(0, 3))) {
                     smplLogic.getCommand().add(test);
                     smplLogic.DisplayCommands(test);
@@ -143,6 +141,7 @@ public class SimpleTronOperators extends JPanel {
                     synchronized (smplLogic.getLock()){
                         smplLogic.getLock().notify();
                     }
+
                 } catch (NumberFormatException nfx) {
                     JOptionPane.showMessageDialog(null,"Please Enter a Valid Number!");
                 }
