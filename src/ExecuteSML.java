@@ -3,7 +3,9 @@ import javax.swing.*;
 public class ExecuteSML implements Runnable {
 
     private int noInstructions;
+    private int errorCode;
     private int instructionCounter;
+    private int operationCode;
     private int accumulator;
     private Object lock;
     private int usrValue;
@@ -71,9 +73,9 @@ public class ExecuteSML implements Runnable {
         instructionCounter = 0;
         int instructionRegister;
         int operand;
-        int operationCode=0;
+        operationCode=0;
 
-        while(operationCode != 43){
+        while(operationCode != 43 && operationCode != -1){
             instructionRegister = memory[instructionCounter];
             operationCode = instructionRegister /100;
             operand = instructionRegister % 100;
@@ -133,6 +135,9 @@ public class ExecuteSML implements Runnable {
             }
             instructionCounter++;
         }
+        if(operationCode == -1) {
+            DisplayError();
+        }
     }
 
     private void DisplayCommand(int instructionCounter, int instructionRegister) {
@@ -157,30 +162,38 @@ public class ExecuteSML implements Runnable {
 
     private void Add(int operand) {
         accumulator += memory[operand];
-//        if(accumulator < -9999 || accumulator > 9999){
-            // break out of loop, fatal error -DSH
-//        }
+        if(accumulator < -9999 || accumulator > 9999){
+//             break out of loop, fatal error -DSH
+            errorCode = 30;
+            operationCode = -1;
+        }
     }
 
     private void Subtract(int operand) {
         accumulator -= memory[operand];
-//        if(accumulator < -9999 || accumulator > 9999){
-        // break out of loop, fatal error -DSH
-//        }
+        if(accumulator < -9999 || accumulator > 9999){
+            // break out of loop, fatal error -DSH
+            errorCode = 31;
+            operationCode = -1;
+        }
     }
 
     private void Divide(int operand) {
-        accumulator /= memory[operand];
-//        if(operand == 0) {
+        if(operand == 0) {
             // break out of loop fatal division by zero error -DSH
-//        }
+            errorCode = 32;
+            operationCode = -1;
+        }
+        accumulator /= memory[operand];
     }
 
     private void Multiply(int operand) {
         accumulator *= memory[operand];
-//        if(accumulator < -9999 || accumulator > 9999){
-        // break out of loop, fatal error -DSH
-//        }
+        if(accumulator < -9999 || accumulator > 9999){
+            // break out of loop, fatal error -DSH
+            errorCode = 33;
+            operationCode = -1;
+        }
     }
 
     private void Branch(int operand) {
@@ -194,13 +207,30 @@ public class ExecuteSML implements Runnable {
     }
 
     private void NegativeConditionalBranch(int operand) {
-//        if(accumulator < -9999) {
-//            // fatal error, out of bounds
-//        } else if(accumulator < 0){
-//            instructionCounter = operand-1;
-//        }
         if(accumulator < 0){
             instructionCounter = operand-1;
+        }
+    }
+
+    private void DisplayError() {
+        switch(errorCode){
+            case(30):
+                jMain.append("\n*** Attempt to add resulted in Integer overflow ***\n");
+                jMain.append("*** SimpleTron execution abnormally terminated ***");
+                break;
+            case(31):
+                jMain.append("\n*** Attempt to subtract resulted in Integer overflow ***\n");
+                jMain.append("*** SimpleTron execution abnormally terminated ***");
+                break;
+            case(32):
+                jMain.append("\n*** Attempt to divide by zero ***\n");
+                jMain.append("*** SimpleTron execution abnormally terminated ***");
+                break;
+            case(33):
+                jMain.append("\n*** Attempt to multiply resulted in Integer overflow ***\n");
+                jMain.append("*** SimpleTron execution abnormally terminated ***");
+                break;
+
         }
     }
 }
