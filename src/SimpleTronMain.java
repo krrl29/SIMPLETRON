@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SimpleTronMain extends JFrame{
     private SimpleTronOperators operatorsPanel;
@@ -21,10 +23,11 @@ public class SimpleTronMain extends JFrame{
 
         programDisplay = new SimpleTronProgramDisplay();
         programOutput = new SimpleTronOutput();
-        memoryDump = new SimpleTronMemoryDump(out);
+        memoryDump = new SimpleTronMemoryDump();
         smplLogic = new SimpleTronLogic(programDisplay.getProgramDisplay(), programOutput.getMainOutputPanel(), memoryDump.getMemOut());
         operatorsPanel = new SimpleTronOperators(smplLogic);
         jbtDisplayDump = new JButton("Display Memory Dump");
+        AddActionListeners();
         addPanels();
         pack();
         this.setVisible(true);
@@ -32,6 +35,19 @@ public class SimpleTronMain extends JFrame{
 
     public static void main(String[] args) {
         SimpleTronMain main = new SimpleTronMain();
+    }
+
+    public void AddActionListeners(){
+        MemoryDumpActionListener memAL = new MemoryDumpActionListener();
+        jbtDisplayDump.addActionListener(memAL);
+    }
+
+    public class MemoryDumpActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            memoryDump.setVisible(true);
+        }
     }
 
 

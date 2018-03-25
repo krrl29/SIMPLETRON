@@ -93,7 +93,7 @@ public class SimpleTronLogic {
     }
 
     private void ExeSML() {
-        exe = new ExecuteSML(noInstructions,memory,jMain, this.lock);
+        exe = new ExecuteSML(noInstructions,memory,jMain, jDump, this.lock);
         Thread t = new Thread(exe);
         t.start();
     }

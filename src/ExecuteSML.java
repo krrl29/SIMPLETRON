@@ -11,6 +11,7 @@ public class ExecuteSML implements Runnable {
     private int usrValue;
     private int[] memory;
     private JTextArea jMain;
+    private JTextArea jDump;
     private boolean test = false;
 
     private SimpleTronMemoryDump memoryDump;
@@ -63,11 +64,12 @@ public class ExecuteSML implements Runnable {
         this.test = test;
     }
 
-    public ExecuteSML(int noInstructions, int[] memory, JTextArea jMain, Object lock) {
+    public ExecuteSML(int noInstructions, int[] memory, JTextArea jMain, JTextArea jDump,Object lock) {
         this.noInstructions = noInstructions;
         this.memory = memory;
         this.jMain = jMain;
         this.lock = lock;
+        this.jDump = jDump;
     }
 
     @Override
@@ -135,6 +137,7 @@ public class ExecuteSML implements Runnable {
                     ZeroConditionalBranch(operand);
                     break;
             }
+            DisplayDump(accumulator, instructionCounter, memory);
             instructionCounter++;
         }
         if(operationCode == -1) {
@@ -242,14 +245,21 @@ public class ExecuteSML implements Runnable {
         int instructionRegister = memory[instructionCounter];
         operationCode = instructionRegister /100;
         int operand = instructionRegister % 100;
-        String out = "REGISTERS:\n";
-        out += "accumulator            " + accumulator + '\n';
-        out += "instructionCounter       " + instructionCounter + '\n';
-        out += "instructionRegister    +" + memory[instructionCounter] + '\n';
-        out += "operationCode             " + operationCode + '\n';
-        out += "operand                   " + operand + '\n';
+//        String out = "REGISTERS:\n";
+//        out += "accumulator            " + accumulator + '\n';
+//        out += "instructionCounter       " + instructionCounter + '\n';
+//        out += "instructionRegister    +" + memory[instructionCounter] + '\n';
+//        out += "operationCode             " + operationCode + '\n';
+//        out += "operand                   " + operand + '\n';
 
-        memoryDump = new SimpleTronMemoryDump(out);
+        jDump.append("REGISTERS:\n");
+        jDump.append("accumulator            " + accumulator + '\n');
+        jDump.append("instructionCounter       " + instructionCounter + '\n');
+        jDump.append("instructionRegister    +" + memory[instructionCounter] + '\n');
+        jDump.append("operationCode             " + operationCode + '\n');
+        jDump.append("operand                   " + operand + '\n');
+
+//        memoryDump = new SimpleTronMemoryDump(out);
 
 
     }

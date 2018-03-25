@@ -11,13 +11,13 @@ public class SimpleTronMemoryDump extends JFrame {
         this.memOut = memOut;
     }
 
-    public SimpleTronMemoryDump(String out) {
+    public SimpleTronMemoryDump() {
         this.setTitle("MEMORY_DUMP");
         this.setSize(300, 300);
-        this.setDefaultCloseOperation((JFrame.EXIT_ON_CLOSE));
+//        this.setDefaultCloseOperation((JFrame.EXIT_ON_CLOSE));
 
         memOut = new JTextArea();
-        memOut.setText(out);
+//        memOut.setText(out);
         this.add(memOut);
         pack();
         //this.setVisible(true);
