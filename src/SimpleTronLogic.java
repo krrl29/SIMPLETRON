@@ -30,6 +30,7 @@ public class SimpleTronLogic {
     private int[] memory;
     private JTextArea jOut;
     private JTextArea jMain;
+    private JTextArea jDump;
 
     public String[] getCOMMANDS_DEF() {
         return COMMANDS_DEF;
@@ -57,11 +58,12 @@ public class SimpleTronLogic {
     }
 
 
-    public SimpleTronLogic(JTextArea PrgDisplay, JTextArea MainDisplay) {
+    public SimpleTronLogic(JTextArea PrgDisplay, JTextArea MainDisplay, JTextArea MemoryDumpDisplay) {
         memory = new int[100];
         command = new ArrayList<>();
         jOut = PrgDisplay;
         jMain = MainDisplay;
+        jDump = MemoryDumpDisplay;
     }
 
     public void DisplayCommands(String commandTxt){
