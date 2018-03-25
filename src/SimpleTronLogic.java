@@ -18,7 +18,8 @@ public class SimpleTronLogic {
             "+41",
             "+42",
             "+43",
-            "-99"
+            "-99",
+            "+00"
     };
     private ArrayList<String> command;
     private Object lock = new Object();

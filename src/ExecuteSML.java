@@ -3,6 +3,7 @@ import javax.swing.*;
 public class ExecuteSML implements Runnable {
 
     private int noInstructions;
+    private int instructionCounter;
     private int accumulator;
     private Object lock;
     private int usrValue;
@@ -67,7 +68,7 @@ public class ExecuteSML implements Runnable {
 
     @Override
     public void run() {
-        int instructionCounter = 0;
+        instructionCounter = 0;
         int instructionRegister;
         int operand;
         int operationCode=0;
@@ -153,17 +154,47 @@ public class ExecuteSML implements Runnable {
 
     private void Add(int operand) {
         accumulator += memory[operand];
+//        if(accumulator < -9999 || accumulator > 9999){
+            // break out of loop, fatal error -DSH
+//        }
     }
 
     private void Subtract(int operand) {
         accumulator -= memory[operand];
+//        if(accumulator < -9999 || accumulator > 9999){
+        // break out of loop, fatal error -DSH
+//        }
     }
 
     private void Divide(int operand) {
         accumulator /= memory[operand];
+//        if(operand == 0) {
+            // break out of loop fatal division by zero error -DSH
+//        }
     }
 
     private void Multiply(int operand) {
         accumulator *= memory[operand];
+//        if(accumulator < -9999 || accumulator > 9999){
+        // break out of loop, fatal error -DSH
+//        }
+    }
+
+    private void Branch(int operand) {
+        instructionCounter = operand;
+    }
+
+    private void ZeroConditionalBranch(int operand) {
+        if(accumulator == 0) {
+            instructionCounter = operand;
+        }
+    }
+
+    private void NegativeConditionalBranch(int operand) {
+        if(accumulator < -9999) {
+            // fatal error, out of bounds
+        } else if(accumulator < 0){
+            instructionCounter = operand;
+        }
     }
 }

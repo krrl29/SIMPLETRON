@@ -70,7 +70,7 @@ public class SimpleTronOperators extends JPanel {
                 smplLogic.getCommand().add(test);
                 smplLogic.DisplayCommands(test);
             } else {
-                // dialog/messageBox that asks to enter valid input maybe?
+                JOptionPane.showMessageDialog(null,"Please Enter a Valid Command!");
             }
         }
     }
@@ -79,9 +79,13 @@ public class SimpleTronOperators extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            smplLogic.setUsrValue(Integer.parseInt(jtxtUserInput.getText()));
-            synchronized (smplLogic.getLock()){
-                smplLogic.getLock().notify();
+            try {
+                smplLogic.setUsrValue(Integer.parseInt(jtxtUserInput.getText()));
+                synchronized (smplLogic.getLock()){
+                    smplLogic.getLock().notify();
+                }
+            } catch (NumberFormatException nfx) {
+                JOptionPane.showMessageDialog(null,"Please Enter a Valid Number!");
             }
         }
     }
