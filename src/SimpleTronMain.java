@@ -12,7 +12,7 @@ public class SimpleTronMain extends JFrame{
 
     public SimpleTronMain(){
         this.setTitle("SIMPLETRON");
-        this.setSize(1000,500);
+        this.setSize(1010,500);
         this.setDefaultCloseOperation((JFrame.EXIT_ON_CLOSE));
         this.setLayout(new GridBagLayout());
         constr = new GridBagConstraints();
@@ -54,27 +54,30 @@ public class SimpleTronMain extends JFrame{
         constr.gridwidth = 1;
         constr.gridy = 0;
         constr.gridheight = 1;
+        constr.weightx = 1;
         this.add(programOutput, constr);
 
         //constraints for Memory dump button
         constr.fill = GridBagConstraints.HORIZONTAL;
-        constr.insets = new Insets(0,20,0,20);
+        constr.insets = new Insets(0,20,0,30);
         constr.ipady = 5;
         constr.ipadx = 10;
         constr.gridx = 0;
         constr.gridwidth = 1;
         constr.gridy = 1;
         constr.gridheight = 1;
+        constr.weightx = 0;
         this.add(jbtDisplayDump, constr);
 
         //constraints for operatorsPanel
         constr.fill = GridBagConstraints.HORIZONTAL;
-        constr.insets = new Insets(5,300,10,10);
-        constr.ipady = 5;
-        constr.ipadx = 10;
+        constr.insets = new Insets(5,300,10,4);
+        constr.ipady = 0;
+        constr.ipadx = 5;
         constr.gridx = 1;
         constr.gridwidth = 1;
         constr.gridy = 1;
+        constr.weightx = 0;
         this.add(operatorsPanel, constr);
 
 

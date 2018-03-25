@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 public class SimpleTronOutput extends JPanel {
     private JTextArea mainOutputPanel;
+    private JScrollPane fuckYouLarry;
     private Border solidBorder;
 
     public JTextArea getMainOutputPanel() {
@@ -27,10 +28,8 @@ public class SimpleTronOutput extends JPanel {
 
     public SimpleTronOutput() {
 
-            mainOutputPanel = new JTextArea(30, 80);
+            mainOutputPanel = new JTextArea(30, 70);
             mainOutputPanel.setEditable(false);
-            solidBorder = BorderFactory.createLineBorder(Color.BLACK, 2, true);
-            mainOutputPanel.setBorder(solidBorder);
             mainOutputPanel.setText("*** Welcome to SimpleTron! ***"+ '\n' +
                     "*** Please enter your program one instruction ***"+ '\n' +
                     "*** (or data word) at a time when prompted ***" + '\n' +
@@ -39,13 +38,15 @@ public class SimpleTronOutput extends JPanel {
                     "*** type the word for that location.  Enter ***" + '\n' +
                     "*** -99990 to stop entering your program. **");
 
+            fuckYouLarry = new JScrollPane(mainOutputPanel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            solidBorder = BorderFactory.createLineBorder(Color.BLACK, 2, true);
+            fuckYouLarry.setBorder(solidBorder);
             addObj();
         }
 
 
         public void addObj(){
-            this.add(mainOutputPanel);
-
+            this.add(fuckYouLarry);
         }
 }
 

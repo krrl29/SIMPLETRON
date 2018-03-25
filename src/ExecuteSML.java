@@ -120,12 +120,15 @@ public class ExecuteSML implements Runnable {
                     break;
                 case (40):
                     DisplayCommand(instructionCounter, instructionRegister);
+                    Branch(operand);
                     break;
                 case (41):
                     DisplayCommand(instructionCounter, instructionRegister);
+                    NegativeConditionalBranch(operand);
                     break;
                 case (42):
                     DisplayCommand(instructionCounter, instructionRegister);
+                    ZeroConditionalBranch(operand);
                     break;
             }
             instructionCounter++;
@@ -181,20 +184,23 @@ public class ExecuteSML implements Runnable {
     }
 
     private void Branch(int operand) {
-        instructionCounter = operand;
+        instructionCounter = operand-1;
     }
 
     private void ZeroConditionalBranch(int operand) {
         if(accumulator == 0) {
-            instructionCounter = operand;
+            instructionCounter = operand-1;
         }
     }
 
     private void NegativeConditionalBranch(int operand) {
-        if(accumulator < -9999) {
-            // fatal error, out of bounds
-        } else if(accumulator < 0){
-            instructionCounter = operand;
+//        if(accumulator < -9999) {
+//            // fatal error, out of bounds
+//        } else if(accumulator < 0){
+//            instructionCounter = operand-1;
+//        }
+        if(accumulator < 0){
+            instructionCounter = operand-1;
         }
     }
 }

@@ -22,15 +22,15 @@ public class SimpleTronOperators extends JPanel {
     public SimpleTronOperators(SimpleTronLogic smplLogic) {
         this.smplLogic = smplLogic;
         solidBorder = BorderFactory.createLineBorder(Color.BLACK, 1, false);
-        this.setLayout(new GridLayout(NUM_ROWS, NUM_COLS));
+        this.setLayout(new GridLayout(NUM_ROWS, NUM_COLS,5,5));
 
         jbtSubmitInstruction = new JButton("Submit Instruction");
         jbtSubmitInput = new JButton("Submit Input");
         addActionListeners(); // adds action listeners to the buttons that have been created
 
         // labels
-        jlblUserInput = new JLabel("User Input: ");
-        jlblEnterInstruction = new JLabel("Enter Instruction: ");
+        jlblUserInput = new JLabel("User Input:");
+        jlblEnterInstruction = new JLabel("Enter Instruction:");
 
         // text fields
         jtxtInstructions = new JTextField();
@@ -52,6 +52,7 @@ public class SimpleTronOperators extends JPanel {
         this.add(jlblUserInput);
         this.add(jtxtUserInput);
         this.add(jbtSubmitInput);
+        //this.getRootPane().setDefaultButton(jbtSubmitInstruction);
     }
 
     private void addActionListeners() {
