@@ -277,22 +277,27 @@ public class ExecuteSML implements Runnable {
         int instructionRegister = memory[instructionCounter];
         operationCode = instructionRegister /100;
         int operand = instructionRegister % 100;
-//        String out = "REGISTERS:\n";
-//        out += "accumulator            " + accumulator + '\n';
-//        out += "instructionCounter       " + instructionCounter + '\n';
-//        out += "instructionRegister    +" + memory[instructionCounter] + '\n';
-//        out += "operationCode             " + operationCode + '\n';
-//        out += "operand                   " + operand + '\n';
 
         jDump.append("\nREGISTERS:\n");
         jDump.append("accumulator            " + accumulator + '\n');
         jDump.append("instructionCounter       " + instructionCounter + '\n');
         jDump.append("instructionRegister    +" + memory[instructionCounter] + '\n');
         jDump.append("operationCode             " + operationCode + '\n');
-        jDump.append("operand                   " + operand + '\n');
+        jDump.append("operand                   " + operand + "\n\n");
 
-//        memoryDump = new SimpleTronMemoryDump(out);
-
+        jDump.append("MEMORY:  \n");
+        jDump.append("              0         1         2         3         4         5         6         7         8         9 \n  ");
+        int count = 0;
+        int memCount = 0;
+        while (count < 100) {
+            jDump.append(count + " " );
+            count+= 10;
+            while (memCount < count){
+                jDump.append(" +" +String.format("%04d", memory[memCount]));
+                memCount++;
+            }
+            jDump.append("\n");
+        }
 
     }
 }
