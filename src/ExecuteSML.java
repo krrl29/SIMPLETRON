@@ -2,7 +2,7 @@ import javax.swing.*;
 
 public class ExecuteSML implements Runnable {
 
-    private int noInstructions;
+    // instance variables
     private int errorCode;
     private int instructionCounter;
     private int operationCode;
@@ -32,14 +32,6 @@ public class ExecuteSML implements Runnable {
         this.usrValue = usrValue;
     }
 
-    public int getNoInstructions() {
-        return noInstructions;
-    }
-
-    public void setNoInstructions(int noInstructions) {
-        this.noInstructions = noInstructions;
-    }
-
     public int[] getMemory() {
         return memory;
     }
@@ -64,8 +56,7 @@ public class ExecuteSML implements Runnable {
         this.test = test;
     }
 
-    public ExecuteSML(int noInstructions, int[] memory, JTextArea jMain, JTextArea jDump,Object lock) {
-        this.noInstructions = noInstructions;
+    public ExecuteSML(int[] memory, JTextArea jMain, JTextArea jDump,Object lock) {
         this.memory = memory;
         this.jMain = jMain;
         this.lock = lock;

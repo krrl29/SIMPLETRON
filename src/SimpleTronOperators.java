@@ -71,16 +71,17 @@ public class SimpleTronOperators extends JPanel {
         jtxtUserInput.addKeyListener(inputKeyEvent);
     }
 
+    // submits the instructions to the program when this action listener is invoked
     public class SubmitInstructionActionListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             String test = jtxtInstructions.getText();
-            if(Arrays.asList(smplLogic.getCOMMANDS_DEF()).contains(test.substring(0,3))){
-                smplLogic.getCommand().add(test);
-                smplLogic.DisplayCommands(test);
+            if(Arrays.asList(smplLogic.getCOMMANDS_DEF()).contains(test.substring(0,3))){ // checks to see if the command is in the list of approved commands
+                smplLogic.getCommand().add(test); // adds the command to an array list
+                smplLogic.DisplayCommands(test); // displays the input command in the correct JTextArea on the screen
             } else {
-                JOptionPane.showMessageDialog(null,"Please Enter a Valid Command!");
+                JOptionPane.showMessageDialog(null,"Please Enter a Valid Command!"); // if not a valid command messagebox
             }
         }
     }
@@ -90,12 +91,12 @@ public class SimpleTronOperators extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                smplLogic.setUsrValue(Integer.parseInt(jtxtUserInput.getText()));
-                synchronized (smplLogic.getLock()){
+                smplLogic.setUsrValue(Integer.parseInt(jtxtUserInput.getText())); // parses the user input
+                synchronized (smplLogic.getLock()){ // once user input is submitted notify the waiting thread to continue
                     smplLogic.getLock().notify();
                 }
             } catch (NumberFormatException nfx) {
-                JOptionPane.showMessageDialog(null,"Please Enter a Valid Number!");
+                JOptionPane.showMessageDialog(null,"Please Enter a Valid Number!"); // if the input is invalid messagebox
             }
         }
     }
@@ -107,6 +108,7 @@ public class SimpleTronOperators extends JPanel {
 
         }
 
+        // allows the user to press enter to submit the button
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getKeyCode()==KeyEvent.VK_ENTER) {
@@ -127,6 +129,7 @@ public class SimpleTronOperators extends JPanel {
         }
     }
 
+    // allows the user to press enter to submit the button
     public class InputKeyEvent implements KeyListener {
 
         @Override

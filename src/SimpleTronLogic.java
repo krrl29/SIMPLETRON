@@ -30,7 +30,6 @@ public class SimpleTronLogic {
     private int accumulator;
     private ExecuteSML exe;
     private int usrValue;
-    private int noInstructions;
     private int[] memory;
     private JTextArea jOut;
     private JTextArea jMain;
@@ -100,12 +99,10 @@ public class SimpleTronLogic {
      * converting to an integer
      * *********************************************************************/
     private void LoadMemory(){
-        noInstructions =0;
         for(int i = 0; i < command.size(); i++){
             if(!command.get(i).equals("-99990")){
                 String op = command.get(i).substring(1,5);
                 memory[i] = Integer.parseInt(op);
-                noInstructions++;
             }
         }
         ExeSML();
@@ -118,7 +115,7 @@ public class SimpleTronLogic {
      * wait() and notify()
      * ***********************************************************************/
     private void ExeSML() {
-        exe = new ExecuteSML(noInstructions,memory,jMain, jDump, this.lock);
+        exe = new ExecuteSML(memory,jMain, jDump, this.lock);
         Thread t = new Thread(exe);
         t.start();
     }
