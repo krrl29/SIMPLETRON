@@ -12,7 +12,6 @@ public class SimpleTronMain extends JFrame{
     private JButton jbtDisplayDump;
     private GridBagConstraints constr;
     private SimpleTronLogic smplLogic;
-    private String out;
 
     public SimpleTronMain(){
         this.setTitle("SIMPLETRON");
@@ -20,13 +19,14 @@ public class SimpleTronMain extends JFrame{
         this.setDefaultCloseOperation((JFrame.EXIT_ON_CLOSE));
         this.setLayout(new GridBagLayout());
         constr = new GridBagConstraints();
-
+        //instantiate all the panes
         programDisplay = new SimpleTronProgramDisplay();
         programOutput = new SimpleTronOutput();
         memoryDump = new SimpleTronMemoryDump();
         smplLogic = new SimpleTronLogic(programDisplay.getProgramDisplay(), programOutput.getMainOutputPanel(), memoryDump.getMemOut());
         operatorsPanel = new SimpleTronOperators(smplLogic);
         jbtDisplayDump = new JButton("Display Memory Dump");
+
         AddActionListeners();
         addPanels();
         pack();
@@ -50,10 +50,8 @@ public class SimpleTronMain extends JFrame{
         }
     }
 
-
+    //add components to main window using gridbag constraints
     public void addPanels() {
-
-
         //constraints for programDisplay
         constr.fill = GridBagConstraints.HORIZONTAL;
         constr.ipady = 0;

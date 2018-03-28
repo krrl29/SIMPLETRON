@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import java.util.Arrays;
 
 public class SimpleTronOperators extends JPanel {
+    //instance vars
     private JButton jbtSubmitInstruction;
     private JButton jbtSubmitInput;
     private JLabel jlblEnterInstruction;
@@ -16,43 +17,38 @@ public class SimpleTronOperators extends JPanel {
     private JTextField jtxtUserInput;
     private SimpleTronLogic smplLogic;
 
-
+    //border for panel
     private Border solidBorder;
-
+    //const for gridlayout
     private final int NUM_ROWS = 2;
     private final int NUM_COLS = 3;
 
 
     public SimpleTronOperators(SimpleTronLogic smplLogic) {
+        //instantiate all the things
+        this.setLayout(new GridLayout(NUM_ROWS, NUM_COLS,5,5));
         this.smplLogic = smplLogic;
         solidBorder = BorderFactory.createLineBorder(Color.BLACK, 1, false);
-
-        this.setLayout(new GridLayout(NUM_ROWS, NUM_COLS,5,5));
-
-
         // buttons
         jbtSubmitInstruction = new JButton("Submit Instruction");
         jbtSubmitInput = new JButton("Submit Input");
-
         // labels
         jlblUserInput = new JLabel("User Input:");
         jlblEnterInstruction = new JLabel("Enter Instruction:");
-
+        jlblUserInput.setHorizontalAlignment(SwingConstants.RIGHT);
+        jlblEnterInstruction.setHorizontalAlignment(SwingConstants.RIGHT);
         // text fields
         jtxtInstructions = new JTextField();
         jtxtUserInput = new JTextField();
-
         //adding borders
         jtxtInstructions.setBorder(solidBorder);
         jtxtUserInput.setBorder(solidBorder);
 
-        jlblEnterInstruction.setHorizontalAlignment(SwingConstants.RIGHT);
-        jlblUserInput.setHorizontalAlignment(SwingConstants.RIGHT);
-
         addActionListeners(); // adds action listeners to the buttons and text
-
+        //add the objects to the operator panel
         addObj();
     }
+    //add objects
     public void addObj() {
         this.add(jlblEnterInstruction);
         this.add(jtxtInstructions);
@@ -62,7 +58,7 @@ public class SimpleTronOperators extends JPanel {
         this.add(jbtSubmitInput);
 
     }
-
+    //listen for all the things
     private void addActionListeners() {
         SubmitInstructionActionListener SubInstAL = new SubmitInstructionActionListener();
         SubmitInputActionListener SubInAL = new SubmitInputActionListener();
