@@ -60,11 +60,12 @@ public class SimpleTronOperators extends JPanel {
     }
     //listen for all the things
     private void addActionListeners() {
+        //button listeners
         SubmitInstructionActionListener SubInstAL = new SubmitInstructionActionListener();
         SubmitInputActionListener SubInAL = new SubmitInputActionListener();
         jbtSubmitInput.addActionListener(SubInAL);
         jbtSubmitInstruction.addActionListener(SubInstAL);
-
+        //key listeners for enter press
         InputKeyEvent inputKeyEvent = new InputKeyEvent();
         InstructionKeyEvent instructionKeyEvent = new InstructionKeyEvent();
         jtxtInstructions.addKeyListener(instructionKeyEvent);
