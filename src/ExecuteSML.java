@@ -12,50 +12,16 @@ public class ExecuteSML implements Runnable {
     private int[] memory;
     private JTextArea jMain;
     private JTextArea jDump;
-    private boolean test = false;
-
     private SimpleTronMemoryDump memoryDump;
 
-    public Object getLock() {
-        return lock;
-    }
-
-    public void setLock(Object lock) {
-        this.lock = lock;
-    }
-
-    public int getUsrValue() {
-        return usrValue;
-    }
-
+    // Only value passed between this thread and the EDT
+    // therefor only accessor and mutator needed -DSH
     public void setUsrValue(int usrValue) {
         this.usrValue = usrValue;
     }
 
-    public int[] getMemory() {
-        return memory;
-    }
-
-    public void setMemory(int[] memory) {
-        this.memory = memory;
-    }
-
-    public JTextArea getjMain() {
-        return jMain;
-    }
-
-    public void setjMain(JTextArea jMain) {
-        this.jMain = jMain;
-    }
-
-    public boolean isTest() {
-        return test;
-    }
-
-    public void setTest(boolean test) {
-        this.test = test;
-    }
-
+    // Memory (list of commands), both output text-area's, and the lock object are
+    // set in the constructor, passed in from the objects instantiation in SimpleTronLogic -DSH
     public ExecuteSML(int[] memory, JTextArea jMain, JTextArea jDump,Object lock) {
         this.memory = memory;
         this.jMain = jMain;

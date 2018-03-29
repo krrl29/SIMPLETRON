@@ -27,7 +27,6 @@ public class SimpleTronLogic {
     };
     private ArrayList<String> command;
     private Object lock = new Object();
-    private int accumulator;
     private ExecuteSML exe;
     private int usrValue;
     private int[] memory;
@@ -43,10 +42,8 @@ public class SimpleTronLogic {
         return lock;
     }
 
-    public void setLock(Object lock) {
-        this.lock = lock;
-    }
-
+    // modified mutator that sets the user value in the exe
+    // class as well -DSH
     public void setUsrValue(int usrValue) {
         this.usrValue = usrValue;
         exe.setUsrValue(usrValue);
@@ -54,10 +51,6 @@ public class SimpleTronLogic {
 
     public ArrayList<String> getCommand() {
         return command;
-    }
-
-    public void setCommand(ArrayList<String> command) {
-        this.command = command;
     }
 
     /**************************************
@@ -95,7 +88,7 @@ public class SimpleTronLogic {
 
     /***********************************************************************
      * Author: Doug Heasley
-     * Purpose: Loads the commands into memory by dropping the first char, and
+     * Purpose: Loads the commands into memory by dropping the first char(+), and
      * converting to an integer
      * *********************************************************************/
     private void LoadMemory(){
@@ -110,9 +103,8 @@ public class SimpleTronLogic {
 
     /************************************************************************
      * Author: Doug Heasley
-     * Purpose: Creates a new thread where the SML will be executed, takes the memory,
-     * and relevent JTextAreas as params, as well as a "lock" object for implementing
-     * wait() and notify()
+     * Purpose: Creates a new thread where the SML will be executed
+     * passes all of the necessary information to the class via the constructor
      * ***********************************************************************/
     private void ExeSML() {
         exe = new ExecuteSML(memory,jMain, jDump, this.lock);
